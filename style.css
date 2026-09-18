@@ -239,6 +239,56 @@ h1 {
   outline-offset: 2px;
 }
 
+.api-key-setup {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 0.5rem;
+margin-bottom: 0.5rem;
+flex-shrink: 0;
+}
+
+#api-key-input {
+flex: 1;
+max-width: 320px;
+padding: 0.25rem 0.5rem;
+border: 1px solid var(--border);
+border-radius: var(--radius);
+background-color: var(--input);
+color: var(--foreground);
+font-size: 0.875rem;
+}
+
+#api-key-input:focus {
+outline: none;
+border-color: var(--ring);
+}
+
+#save-key-btn {
+padding: 0.25rem 0.75rem;
+border: 1px solid var(--border);
+border-radius: var(--radius);
+background-color: var(--input);
+color: var(--foreground);
+font-size: 0.875rem;
+cursor: pointer;
+transition: all 0.2s ease-in-out;
+white-space: nowrap;
+}
+
+#save-key-btn:hover {
+background-color: var(--secondary);
+}
+
+#api-key-status {
+text-align: center;
+color: #10b981;
+font-size: 0.8rem;
+min-height: 1rem;
+margin-bottom: 0.5rem;
+flex-shrink: 0;
+}
+
 #chatlog {
   flex: 1;
   overflow-y: auto;
