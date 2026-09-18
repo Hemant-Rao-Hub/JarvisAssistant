@@ -1268,11 +1268,47 @@ async function startListening() {
  * Main initialization function
  * Sets up the assistant when page loads
  */
+/**
+ * Wire up the manual API key input field in the page
+ * Lets users paste their own API key directly instead of using devtools
+ */
+function setupManualKeyEntry() {
+const apiKeyInput = document.getElementById("api-key-input");
+const saveKeyBtn = document.getElementById("save-key-btn");
+const apiKeyStatus = document.getElementById("api-key-status");
+
+if (!saveKeyBtn || !apiKeyInput) return;
+
+function saveKey() {
+const key = apiKeyInput.value.trim();
+if (!key) return;
+
+localStorage.setItem(`${currentModel}_api_key`, key);
+API_KEYS[currentModel] = key;
+apiKeyInput.value = "";
+
+if (apiKeyStatus) {
+apiKeyStatus.textContent = `Saved ${currentModel.toUpperCase()} key`;
+apiKeyStatus.style.color = "var(--foreground)";
+setTimeout(() => {
+apiKeyStatus.textContent = "";
+}, 3000);
+}
+
+updateModelStatus();
+}
+
+saveKeyBtn.addEventListener("click", saveKey);
+apiKeyInput.addEventListener("keypress", function (e) {
+if (e.key === "Enter") saveKey();
+});
+}
+
 async function init() {
   try {
     await waitForArtyom();
 
-    await initializeAPI();
+    await initializeAPI(); setupManualKeyEntry();
 
     loadChatHistory();
 
